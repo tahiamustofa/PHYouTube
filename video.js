@@ -49,12 +49,12 @@ function display(get) {
         innerCont.innerHTML = `
           <div class="relative flex  flex-col justify-center overflow-hidden bg-gray-50 py-6 sm:py-12">
               <div class="relative flex flex-col justify-center items-center h-4/5">
-                <img src=" ${item.thumbnail}" alt="" class="w-full h-[500px]">
+                <img src=" ${item.thumbnail}" alt="" class="w-full lg:h-[500px] h-[400px]">
                 <p class="absolute top-4 right-1 p-3 text-white font-bold">
 
                 ${item.others.posted_date ? `<span class="rounded-full text-white bg-purple-500 p-2 shadow-2xl">${secondsToTime(item.others.posted_date)}</span>` : ""}
                         </p>
-               <div class="absolute mx-auto top-1/2 w-96">
+               <div class="absolute mx-auto lg:top-1/2 top-1/3 lg:w-96 w-72">
                 <div
                 class="group relative cursor-pointer overflow-hidden bg-white px-6 pt-10 pb-8 shadow-xl ring-1 ring-gray-900/5 transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl sm:mx-auto sm:max-w-sm sm:rounded-lg sm:px-10">
                 <span class="absolute top-10 z-0 h-2 w-2 rounded-full bg-sky-500 transition-all duration-300 group-hover:scale-[100]"></span>

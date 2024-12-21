@@ -9,19 +9,22 @@
 </head>
 <body>
     <header>
-        <nav class="flex items-center justify-between p-4 bg-white shadow-md">
-            <!-- Logo -->
-            <div class="flex items-center space-x-2">
+        <nav class="flex lg:flex-row flex-col items-center justify-between p-4 bg-white shadow-md gap-5">
+          <div class="flex sm:flex-row flex-col justify-between  md:gap-40 gap-5">
+             <!-- Logo -->
+             <div class="flex items-center space-x-2">
               <img src="img/Group 26.png" alt="">
             </div>
           
             <!-- Sort Button -->
-            <button id="sortId" class="px-4 py-2 flex gap-2 text-gray-700 bg-gray-200 rounded hover:bg-gray-300">
+            <button id="sortId" class="lg:ml-auto px-4 py-2 flex gap-2 text-gray-700 bg-gray-200 rounded hover:bg-gray-300">
                 <div class="w-6 h-6 bg-red-500 rounded-full flex items-center justify-center">
                     <span class="text-white font-bold text-sm">▶</span>
                   </div>
                 Sort by view
             </button>
+          </div>
+           
           
             <!-- Blog Button -->
             <button class="px-4 py-2 text-white bg-red-500 rounded hover:bg-red-600">
@@ -31,14 +34,14 @@
           
     </header>
     <main>
-        <section class="container mx-auto my-10">
+        <section class="container mx-auto my-10 md:px-10 px-4">
             
-            <div id="divPost" class="mx-auto flex gap-5 justify-center">
+            <div id="divPost" class="mx-auto flex md:flex-row flex-col gap-5 justify-center">
 
             </div>
-            <div class="grid grid-cols-3 gap-5" id="cardShow">
+            <div class="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-5" id="cardShow">
               
-            <!-- https://play.tailwindcss.com/eCfibrSI2X -->
+           
           
 
             </div>      
