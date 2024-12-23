@@ -1,35 +1,56 @@
 let selectedCategoryId = null; 
+let notActive = null;
 let fetchVideo = async function (url) {
     const res = await fetch('https://openapi.programming-hero.com/api/videos/categories');
     const response = await res.json();
     const all = response.data;
     const divPost = document.getElementById('divPost');
     // console.log(all);
-    all.forEach(element => {
-        console.log(element)
+    all.forEach((element,index) => {
+        console.log(element,index)
         const createNew = document.createElement('div');
         createNew.classList = (`flex gap-3`);
         const uniqueId = `btnCat_${element.category_id}`;
         createNew.innerHTML = `
-    <button id="${uniqueId}" class="px-4 py-2  flex gap-2 text-gray-700 bg-gray-200 rounded active:bg-red-300">
+    <button id="${uniqueId}" class="px-4 py-2  flex gap-2 text-gray-700 bg-gray-200 rounded">
                 ${element.category}
                 </button>
                 `;
         divPost.appendChild(createNew)
+        
         // Add an event listener for the second button
         const btn = document.getElementById(uniqueId);
+         // **"All" ক্যাটাগরি ডিফল্ট Active করার জন্য Index ব্যবহার**
+         if (index==0) {
+            notActive=btn;
+            btn.classList=`bg-pink-500 px-4 py-2 rounded`;
+            allID(`${element.category_id}`);
+            selectedCategoryId =`${element.category_id}`; 
+         }
         btn.addEventListener('click', () => {
+            spinnerLoad(true);
+            if (notActive) {
+                notActive.classList='px-4 py-2  flex gap-2 text-gray-700 bg-gray-200 rounded';
+            }
+            notActive=btn;
+            btn.classList=`bg-pink-500 px-4 py-2 rounded`;
+            
+            // Redirects to drawing.html
+            if (createNew.innerText === "Drawing") { 
+                window.location.replace("drawing.html"); 
+            }
             allID(`${element.category_id}`);
             selectedCategoryId =`${element.category_id}`;
         });
-
+        
     });
 }
 const sortId=document.getElementById('sortId');
 sortId.addEventListener('click', () => {
+    spinnerLoad(true);
     sortClick(selectedCategoryId)
 });
-async function allID(id) {
+async function allID(id) {   
     const res = await fetch(`https://openapi.programming-hero.com/api/videos/category/${id}`);
     const response = await res.json();
     const get = response.data;
@@ -85,18 +106,30 @@ function display(get) {
                     </div> `
        
         cardShow.appendChild(innerCont);
-        
+       
     });
+    spinnerLoad(false);  
 }
 async function sortClick(id) {
     const res = await fetch(`https://openapi.programming-hero.com/api/videos/category/${id}`);
     const response = await res.json();
     const get = response.data;
-    const sortCont = get.sort((a, b) => {const A=(parseFloat(a.others.views.replace(/[^0-9.]/g, '')));
+    const sortCont = get.sort((a, b) => 
+        {const A=(parseFloat(a.others.views.replace(/[^0-9.]/g, '')));
         const B= (parseFloat(b.others.views.replace(/[^0-9.]/g, '')));
          return B-A;});
-    console.log(sortCont)
+    // console.log(sortCont)
     display(sortCont);
+}
+function spinnerLoad(isLoad) {
+    const spinner = document.getElementById('spinner');
+    if (isLoad==true) {
+        spinner.classList.remove('hidden');
+    } else {
+        spinner.classList.add('hidden');
+    }
+   
 }
 
 fetchVideo();
+
